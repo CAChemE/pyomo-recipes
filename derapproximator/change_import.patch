@@ -1,0 +1,11 @@
+--- setup.py.old	2016-02-14 19:25:29.887063304 +0100
++++ setup.py	2016-02-14 19:25:41.327063970 +0100
+@@ -13,7 +13,7 @@
+ URL                 = 'http://openopt.org'
+ LICENSE             = 'new BSD'
+ 
+-from __init__ import __version__ as Ver
++from DerApproximator import __version__ as Ver
+ 
+ #DOWNLOAD_URL        = 'http://openopt.org/images/6/6a/DerApproximator.zip'
+ 

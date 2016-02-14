@@ -1,0 +1,11 @@
+--- DerApproximator.py.old	2016-02-14 19:27:24.067069947 +0100
++++ DerApproximator.py	2016-02-14 19:27:31.050403687 +0100
+@@ -3,6 +3,8 @@
+ made by Dmitrey
+ """
+ 
++__version__ = '0.52'
++
+ try:
+     import numpypy as numpy
+ except:

@@ -1,0 +1,65 @@
+package:
+  name: derapproximator
+  version: "0.52"
+
+source:
+  fn: DerApproximator-0.52.tar.gz
+  url: https://pypi.python.org/packages/source/D/DerApproximator/DerApproximator-0.52.tar.gz
+  md5: 31138fd6de99c7a6c1d7f2f97dc41c7d
+  patches:
+   # List any patch files here
+    - empty_init.patch
+    - change_import.patch
+    - move_version.patch
+
+# build:
+  # noarch_python: True
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - derapproximator = derapproximator:main
+    #
+    # Would create an entry point called derapproximator that calls derapproximator.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+
+  run:
+    - python
+    - numpy
+
+test:
+  # Python imports
+  imports:
+    - DerApproximator
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: http://openopt.org
+  license: BSD License
+  summary: 'A python module for finite-differences derivatives approximation'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml

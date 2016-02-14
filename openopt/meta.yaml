@@ -1,0 +1,80 @@
+package:
+  name: openopt
+  version: "0.5625"
+
+source:
+  fn: openopt-0.5625.tar.gz
+  url: https://pypi.python.org/packages/source/o/openopt/openopt-0.5625.tar.gz
+  md5: 513f4f08d786310bbad6285d375ebe4d
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+# build:
+  # noarch_python: True
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - openopt = openopt:main
+    #
+    # Would create an entry point called openopt that calls openopt.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+    - setproctitle
+
+  run:
+    - python
+    - numpy
+    - setproctitle
+
+test:
+  # Python imports
+  imports:
+    - openopt
+    - openopt.examples
+    - openopt.kernel
+    - openopt.solvers
+    - openopt.solvers.BrasilOpt
+    - openopt.solvers.CVXOPT
+    - openopt.solvers.CoinOr
+    - openopt.solvers.HongKongOpt
+    - openopt.solvers.MATLAB
+    - openopt.solvers.Octave
+    - openopt.solvers.Standalone
+    - openopt.solvers.UkrOpt
+    - openopt.solvers.lp_solve
+    - openopt.solvers.nlopt
+    - openopt.solvers.scipy_optim
+    - openopt.tests
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: http://openopt.org
+  license: BSD License
+  summary: 'A python module for numerical optimization'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
