@@ -78,7 +78,7 @@ test:
     # entry points work.
 
     - test.pyutilib --help
-    - lpython --help
+    #- lpython --help
     - pypi_downloads --help
     - pyutilib_test_driver --help
     - dispatch_srvr --help
