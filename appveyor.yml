@@ -8,17 +8,12 @@ branches:
   - master
 
 environment:
-  global:
-    MINICONDA: "%ProgramData%\\chocolatey\\lib\\Miniconda\\tools"
-
   matrix:
     - PYTHON: 3.4
     - PYTHON: 3.5
 
 install:
-  - "choco install -y miniconda"
-  - "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
-  - "dir %MINICONDA%"
+  - "set PATH=C:\\Miniconda3;C:\\Miniconda3\\Scripts;C:\\Miniconda3-64;C:\\Miniconda3-64\\Scripts;%PATH%"
 
   # Install the build and runtime dependencies of the project.
   - "conda config --set always_yes yes --set changeps1 no"
