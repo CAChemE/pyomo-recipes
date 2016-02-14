@@ -1,0 +1,12 @@
+--- FuncDesigner/translator.py.old	2016-02-14 21:20:35.630798394 +0100
++++ FuncDesigner/translator.py	2016-02-14 21:20:58.027466364 +0100
+@@ -137,8 +137,7 @@
+     
+     # without copy() ipopt and probably others can replace it by noise after closing
+     kw = {'skipArrayCast':True} if isComplexArray else {}
+-    r = ooPoint((v, x[S.oovar_indexes[i]:S.oovar_indexes[i+1]]) for i, v in enumerate(S._variables), **kw)
+-    
++    r = ooPoint(((v, x[S.oovar_indexes[i]:S.oovar_indexes[i+1]]) for i, v in enumerate(S._variables)), **kw) 
+     S._SavedValues['prevVal'] = r
+     S._SavedValues['prevX'] = copy(x)
+     return r

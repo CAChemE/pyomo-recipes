@@ -6,6 +6,8 @@ source:
   fn: FuncDesigner-0.5620.tar.gz
   url: https://pypi.python.org/packages/source/F/FuncDesigner/FuncDesigner-0.5620.tar.gz
   md5: 413813cd62029b9d9156c5085949d694
+  patches:
+    - fix_generator35.patch
 
 build:
   number: 1
