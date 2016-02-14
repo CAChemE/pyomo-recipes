@@ -35,6 +35,7 @@ requirements:
     - python
     - setuptools
     - pyutilib >=5.2.3601
+    - pyro4 >=4.41
     - ply
     - nose
     - six >=1.6.1
