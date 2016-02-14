@@ -6,21 +6,9 @@ source:
   fn: Pyro4-4.41.tar.gz
   url: https://pypi.python.org/packages/source/P/Pyro4/Pyro4-4.41.tar.gz
   md5: ed69e9bfafa9c06c049a87cb0c4c2b6c
-#  patches:
-   # List any patch files here
-   # - fix.patch
 
 build:
-  # noarch_python: True
-  # preserve_egg_dir: True
   entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - pyro4 = pyro4:main
-    #
-    # Would create an entry point called pyro4 that calls pyro4.main()
-
     - pyro4-ns = Pyro4.naming:main
     - pyro4-nsc = Pyro4.nsc:main
     - pyro4-test-echoserver = Pyro4.test.echoserver:main
@@ -30,7 +18,7 @@ build:
 
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  number: 1
 
 requirements:
   build:

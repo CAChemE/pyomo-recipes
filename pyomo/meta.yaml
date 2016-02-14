@@ -6,23 +6,12 @@ source:
   fn: Pyomo-4.2.10784.tar.gz
   url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-4.2.10784.tar.gz
   md5: b5d0ffcb19a8b55904b8e42a28c3bf09
-#  patches:
-   # List any patch files here
-   # - fix.patch
 
 build:
   number: 1
 
-  # noarch_python: True
   preserve_egg_dir: True
   entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - pyomo = pyomo:main
-    #
-    # Would create an entry point called pyomo that calls pyomo.main()
-
     - runbenders=pyomo.pysp.benders:Benders_main
     - runph=pyomo.pysp.phinit:PH_main
     - runef=pyomo.pysp.ef_writer_script:main
@@ -30,8 +19,6 @@ build:
     - phsolverserver=pyomo.pysp.phsolverserver:main
     - scenariotreeserver=pyomo.pysp.scenariotree.scenariotreeserver:main
     - computeconf=pyomo.pysp.computeconf:main
-    #- pyomoossolverservice=pyomo.os.OSSolverService:execute
-    #- results_schema=pyomo.scripting.commands:results_schema
     - pyro_mip_server=pyomo.scripting.pyro_mip_server:main
     - test.pyomo=pyomo.scripting.runtests:runPyomoTests
     - pyomo=pyomo.scripting.pyomo_main:main
@@ -42,7 +29,6 @@ build:
     - readsol=pyomo.scripting.commands:readsol
     - ossolverservice=pyomo.scripting.commands:OSSolverService
     - pyomo_python=pyomo.scripting.commands:pyomo_python
-    #- pyomo_old=pyomo.scripting.pyomo_command:main
 
 requirements:
   build:
@@ -164,19 +150,12 @@ test:
     - phsolverserver --help
     - scenariotreeserver --help
     - computeconf --help
-    #- pyomoossolverservice --help  # See https://software.sandia.gov/trac/pyomo/changeset/10572
-    #- results_schema --help  # Bug
     - pyro_mip_server --help
     - test.pyomo --help
     - pyomo --help
     - pyomo_ns --help
     - pyomo_nsc --help
-    #- kill_pyro_mip_servers --help
-    #- launch_pyro_mip_servers --help
-    #- readsol --help
-    #- ossolverservice
     - pyomo_python --help
-    #- pyomo_old --help
 
   # You can also put a file called run_test.py in the recipe that will be run
   # at test time.
