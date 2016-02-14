@@ -27,5 +27,5 @@ install:
 build: off
 
 test_script:
-  - "conda build pyutilib pyro4 pyomo --python %PYTHON%"
-  - "conda build suds-jurko openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "conda build pyutilib serpent pyro4 pyomo --python %PYTHON%"
+  - "conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
