@@ -1,6 +1,6 @@
-# conda-recipes
+# pyomo-recipes
 
-Useful conda recipes.
+Useful conda recipes for Pyomo and dependencies.
 
 To compile pyomo:
 
