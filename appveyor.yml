@@ -8,17 +8,20 @@ branches:
   - master
 
 environment:
+  BINSTAR_TOKEN:
+    secure: n7ll7JzU0nTN2caHJWRj0IflEN66ZIYwbMzexr6G2U7njzVdOY5Uvn17UZdhebq8
+
   matrix:
     - PYTHON: 3.4
     - PYTHON: 3.5
 
 install:
-  - "set PATH=C:\\Miniconda3;C:\\Miniconda3\\Scripts;C:\\Miniconda3-64;C:\\Miniconda3-64\\Scripts;%PATH%"
+  - "set PATH=C:\\Miniconda3-x64;C:\\Miniconda3-x64\\Scripts;%PATH%"
 
   # Install the build and runtime dependencies of the project.
   - "conda config --set always_yes yes --set changeps1 no"
   - "conda update -q conda"
-  - "conda install -q conda-build"
+  - "conda install -q conda-build anaconda-client"
   - "conda info -a"
 
   # Check that we have the expected version of Python
@@ -26,6 +29,14 @@ install:
 
 build: off
 
-test_script:
+before_test:
   - "conda build pyutilib serpent pyro4 pyomo --python %PYTHON%"
   - "conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "conda build ipopt_bin"
+
+# Actual test here
+test_script:
+  - "echo XXX Test here XXX"
+
+after_test:
+  #- "anaconda -t %BINSTAR_TOKEN% upload C:\\Miniconda3-x64\\conda-bld\\win-64\\ipopt_bin-3.11.1-1.tar.bz2"

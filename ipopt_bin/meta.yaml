@@ -1,0 +1,49 @@
+package:
+  name: ipopt_bin
+  version: "3.11.1"
+
+source:
+  fn: Ipopt-3.11.1-win64-intel13.1.zip [win64]
+  url: http://www.coin-or.org/download/binary/Ipopt/Ipopt-3.11.1-win64-intel13.1.zip [win64]
+  md5: c8c1e3a26da21aa9f061353981556a52 [win64]
+
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  number: 1
+
+#requirements:
+#  build:
+#    - python
+#    - setuptools
+#
+#  run:
+#    - python
+
+#test:
+#  # Python imports
+#  # imports:
+#
+#  commands:
+#    # You can put test commands to be run here.  Use this to test that the
+#    # entry points work.
+#
+#    - pep8 --help
+#
+#  # You can also put a file called run_test.py in the recipe that will be run
+#  # at test time.
+#
+#  # requires:
+#    # Put any additional test requirements here.  For example
+#    # - nose
+
+about:
+  home: https://projects.coin-or.org/Ipopt
+  license: Eclipse Public License (EPL)
+  summary: 'Software package for large-scale nonlinear optimization'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
