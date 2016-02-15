@@ -1,5 +1,5 @@
---- tempfiles.py.old	2016-02-15 21:09:58.519792434 +0100
-+++ tempfiles.py	2016-02-15 21:11:10.203121397 +0100
+--- pyutilib/component/config/tempfiles.py.old	2016-02-15 21:09:58.519792434 +0100
++++ pyutilib/component/config/tempfiles.py	2016-02-15 21:11:10.203121397 +0100
 @@ -170,21 +170,13 @@
                          except WindowsError:
                              # Sometimes Windows doesn't release the
