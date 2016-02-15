@@ -1,20 +1,24 @@
---- setup.py.old	2016-02-15 15:13:24.407400900 +0100
-+++ setup.py	2016-02-15 15:16:20.011658600 +0100
-@@ -11,6 +11,7 @@
- import re
- import sys
- from distutils.core import setup, Extension
-+from setuptools import setup
+--- setup.py.old	2016-02-15 15:42:23.842254400 +0100
++++ setup.py	2016-02-15 15:46:45.447388500 +0100
+@@ -30,6 +30,13 @@
+     
+ #from numpy.distutils.system_info import system_info, NotFoundError, dict_append, so_ext
+ from numpy.distutils.core import setup
++try:
++    from distutils.command.build_py import build_py_2to3
++except ImportError:
++    pass
++COMMANDS = {}
++if sys.version_info[0] >= 3:
++    COMMANDS['build_py'] = build_py_2to3
  
- define_macros={}
+ DOC_FILES = []
  
-@@ -72,6 +73,9 @@
- except:
-     pass
- 
-+if sys.version_info >= (3,):
-+    kwargs['use_2to3'] = True
-+
- setup(
-     name = 'setproctitle',
-     description = 'A Python module to customize the process title',
+@@ -85,5 +92,6 @@
+               'Intended Audience :: Developers',
+               'Intended Audience :: Science/Research',
+               'License :: OSI Approved :: BSD License',
+-              'Topic :: Scientific/Engineering']
++              'Topic :: Scientific/Engineering'],
++        cmdclass=COMMANDS,
+     )
