@@ -9,17 +9,20 @@ branches:
   - test_ipopt
 
 environment:
+  BINSTAR_TOKEN:
+    secure: VgEkcp8oCkAj5IbrXXNUCFSYuNW24rpZaJReqgEtmlrdbreMYopJmjzP2tTFYpXd
+
   matrix:
-    - PYTHON: 3.4
+    #- PYTHON: 3.4
     - PYTHON: 3.5
 
 install:
-  - "set PATH=C:\\Miniconda3;C:\\Miniconda3\\Scripts;C:\\Miniconda3-64;C:\\Miniconda3-64\\Scripts;%PATH%"
+  - "set PATH=C:\\Miniconda3-64;C:\\Miniconda3-64\\Scripts;%PATH%"
 
   # Install the build and runtime dependencies of the project.
   - "conda config --set always_yes yes --set changeps1 no"
   - "conda update -q conda"
-  - "conda install -q conda-build"
+  - "conda install -q conda-build anaconda-client"
   - "conda info -a"
 
   # Check that we have the expected version of Python
@@ -35,3 +38,6 @@ before_test:
 # Actual test here
 test_script:
   - "echo XXX Test here XXX"
+
+after_test:
+  - "anaconda -t %BINSTAR_TOKEN% upload C:\\Miniconda3\\conda-bld\\win-64\\ipopt_bin-3.11.1-1.tar.bz2"
