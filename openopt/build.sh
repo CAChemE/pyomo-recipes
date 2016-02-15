@@ -1,5 +1,7 @@
 #!/bin/bash
 
+2to3 -x import -w --no-diffs openopt/
+
 $PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.

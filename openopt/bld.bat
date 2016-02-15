@@ -1,3 +1,5 @@
+2to3 -x import -w --no-diffs openopt
+
 "%PYTHON%" setup.py install
 if errorlevel 1 exit 1
 
