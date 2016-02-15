@@ -6,9 +6,9 @@ source:
   fn: openopt-0.5625.tar.gz
   url: https://pypi.python.org/packages/source/o/openopt/openopt-0.5625.tar.gz
   md5: 513f4f08d786310bbad6285d375ebe4d
-#  patches:
+  patches:
    # List any patch files here
-   # - fix.patch
+    - add_2to3.patch
 
 build:
   number: 1
