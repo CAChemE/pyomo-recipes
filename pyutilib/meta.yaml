@@ -7,6 +7,9 @@ source:
   url: https://pypi.python.org/packages/source/P/PyUtilib/PyUtilib-5.2.3601.tar.gz
   md5: 0c0d54632c70427c84a21d31f56c1a5b
 
+  patches:
+    - fix_tempfiles.patch
+
 build:
   number: 1
 

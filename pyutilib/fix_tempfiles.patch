@@ -1,0 +1,31 @@
+--- tempfiles.py.old	2016-02-15 21:09:58.519792434 +0100
++++ tempfiles.py	2016-02-15 21:11:10.203121397 +0100
+@@ -170,21 +170,13 @@
+                         except WindowsError:
+                             # Sometimes Windows doesn't release the
+                             # file lock immediately when the process
+-                            # terminates.  If we get an error, wait a
+-                            # second and try again.
+-                            try:
+-                                time.sleep(1)
+-                                os.remove(filename)
+-                            except WindowsError:
+-                                if deletion_errors_are_fatal:
+-                                    raise
+-                                else:
+-                                    # Failure to delete a tempfile
+-                                    # should NOT be fatal
+-                                    logger = logging.getLogger(
+-                                        'pyutilib.component.config')
+-                                    logger.warning("Unable to delete temporary "
+-                                                   "file %s" % ( filename, ) )
++                            # terminates.
++                            # Failure to delete a tempfile
++                            # should NOT be fatal
++                            logger = logging.getLogger(
++                                'pyutilib.component.config')
++                            logger.warning("Unable to delete temporary "
++                                           "file %s" % ( filename, ) )
+ 
+         if len(self._tempfiles) == 0:
+             self._tempfiles = [[]]
