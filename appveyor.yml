@@ -6,6 +6,7 @@ version: 0.1.dev0-{build}
 branches:
   only:
   - master
+  - test_ipopt
 
 environment:
   matrix:
@@ -26,6 +27,11 @@ install:
 
 build: off
 
+before_test:
+  #- "conda build pyutilib serpent pyro4 pyomo --python %PYTHON%"
+  #- "conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "conda build ipopt_bin"
+
+# Actual test here
 test_script:
-  - "conda build pyutilib serpent pyro4 pyomo --python %PYTHON%"
-  - "conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "echo XXX Test here XXX"

@@ -2,14 +2,23 @@
 
 Useful conda recipes for Pyomo and dependencies.
 
+## Compilation from the recipes
+
 To compile pyomo:
 
-```bash
+```cmd
 $ conda build pyutilib serpent pyro4 pyomo --python 3.5
 ```
 
 To compile pyomo.extras:
 
-```bash
+```cmd
 conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python 3.5
+```
+
+To compile optional solvers:
+
+```cmd
+conda build glpk
+conda build ipopt_bin  :: Windows only
 ```
