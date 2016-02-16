@@ -10,7 +10,7 @@ source:
     - fix_generator35.patch
 
 build:
-  number: 1
+  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
 
 requirements:
   build:

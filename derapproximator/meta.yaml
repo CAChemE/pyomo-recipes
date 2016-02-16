@@ -12,21 +12,8 @@ source:
     - change_import.patch
     - move_version.patch
 
-# build:
-  # noarch_python: True
-  # preserve_egg_dir: True
-  # entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - derapproximator = derapproximator:main
-    #
-    # Would create an entry point called derapproximator that calls derapproximator.main()
-
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+build:
+  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
 
 requirements:
   build:

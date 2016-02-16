@@ -17,7 +17,7 @@ source:
   md5: 69d74f98b1874dacb0be4506646c698f [osx]
 
 build:
-  number: 1
+  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
 
 about:
   home: https://projects.coin-or.org/Ipopt

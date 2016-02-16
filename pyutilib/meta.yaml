@@ -8,7 +8,7 @@ source:
   md5: 0c0d54632c70427c84a21d31f56c1a5b
 
 build:
-  number: 1
+  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
 
   preserve_egg_dir: True
   entry_points:
