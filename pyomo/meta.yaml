@@ -7,6 +7,9 @@ source:
   url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-4.2.10784.tar.gz
   md5: b5d0ffcb19a8b55904b8e42a28c3bf09
 
+  patches:
+    - fix_neos.patch
+
 build:
   number: 1
 

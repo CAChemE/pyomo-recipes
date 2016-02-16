@@ -1,0 +1,200 @@
+Index: /pyomo/trunk/pyomo/opt/plugins/sol.py
+===================================================================
+--- pyomo/opt/plugins/sol.py	(revision 10956)
++++ pyomo/opt/plugins/sol.py	(revision 11162)
+@@ -72,5 +72,6 @@
+         else:
+             IN.close()
+-            msg = "Error reading \"" + filename + "\": no Options line found.\nSOL File Output:\n"
++            msg = ("Error reading \"" + filename +
++                   "\": no Options line found.\nSOL File Output:\n")
+             IN = open(filename, 'r')
+             for line in IN:
+@@ -96,8 +97,10 @@
+         if line:                    # WEH - when is this true?
+             if line[:5] != "objno":         #pragma:nocover
+-                raise ValueError("Error reading \"" + filename + "\": expected \"objno\", found", line)
++                raise ValueError("Error reading \"" + filename +
++                                 "\": expected \"objno\", found", line)
+             t = line.split()
+             if len(t) != 3:
+-                raise ValueError("Error reading \"" + filename + "\": expected two numbers in objno line, but found", line)
++                raise ValueError("Error reading \"" + filename +
++                                 "\": expected two numbers in objno line, but found", line)
+             objno = [int(t[1]), int(t[2])]
+         res.solver.message = msg.strip()
+@@ -129,10 +132,12 @@
+             soln_status = SolutionStatus.unbounded
+         elif (objno[1] >= 400) and (objno[1] <= 499):
+-            objno_message = "EXCEEDED MAXIMUM NUMBER OF ITERATIONS: the solver was stopped by a limit that you set!"
++            objno_message = ("EXCEEDED MAXIMUM NUMBER OF ITERATIONS: the solver "
++                             "was stopped by a limit that you set!")
+             res.solver.termination_condition = TerminationCondition.maxIterations
+             res.solver.status = SolverStatus.warning
+             soln_status = SolutionStatus.stoppedByLimit
+         elif (objno[1] >= 500) and (objno[1] <= 599):
+-            objno_message = "FAILURE: the solver stopped by an error condition in the solver routines!"
++            objno_message = ("FAILURE: the solver stopped by an error condition "
++                             "in the solver routines!")
+             res.solver.termination_condition = TerminationCondition.internalSolverError
+             res.solver.status = SolverStatus.error
+@@ -169,8 +174,17 @@
+             ### Read suffixes ###
+             line = IN.readline()
+-            line = line.strip()
+-            while (line and len(line) > 0):
+-                line = line.split()
+-                assert line[0] == 'suffix'
++            while line:
++                line = line.strip().split()
++                if line[0] != 'suffix':
++                    # We assume this is the start of a
++                    # section like kestrel_option, which
++                    # comes after all suffixes.
++                    remaining = ""
++                    line = IN.readline()
++                    while line:
++                        remaining += line.strip()+"; "
++                        line = IN.readline()
++                    res.solver.message += remaining
++                    break
+                 unmasked_kind = int(line[1])
+                 kind = unmasked_kind & 3 # 0-var, 1-con, 2-obj, 3-prob
+@@ -191,5 +205,6 @@
+                         for cnt in xrange(nvalues):
+                             suf_line = IN.readline().split()
+-                            soln_variable["v"+suf_line[0]][suffix_name] = convert_function(suf_line[1])
++                            soln_variable["v"+suf_line[0]][suffix_name] = \
++                                convert_function(suf_line[1])
+                     elif kind == 1: # Con
+                         for cnt in xrange(nvalues):
+@@ -202,9 +217,11 @@
+                             # when loaded into real suffixes, so it is largely redundant.
+                             translated_suffix_name = suffix_name[0].upper() + suffix_name[1:]
+-                            soln_constraint[key][translated_suffix_name] = convert_function(suf_line[1])
++                            soln_constraint[key][translated_suffix_name] = \
++                                convert_function(suf_line[1])
+                     elif kind == 2: # Obj
+                         for cnt in xrange(nvalues):
+                             suf_line = IN.readline().split()
+-                            soln.objective["o"+suf_line[0]][suffix_name] = convert_function(suf_line[1])
++                            soln.objective.setdefault("o"+suf_line[0],{})[suffix_name] = \
++                                convert_function(suf_line[1])
+                     elif kind == 3: # Prob
+                         # Skip problem kind suffixes for now. Not sure the
+@@ -218,5 +235,4 @@
+                         IN.readline()
+                 line = IN.readline()
+-                line = line.strip()
+         ###
+         IN.close()
+Index: /pyomo/trunk/pyomo/neos/plugins/kestrel_plugin.py
+===================================================================
+--- pyomo/neos/plugins/kestrel_plugin.py	(revision 10867)
++++ pyomo/neos/plugins/kestrel_plugin.py	(revision 11163)
+@@ -30,5 +30,4 @@
+         AsynchronousSolverManager.clear(self)
+         self.kestrel = pyomo.neos.kestrel.kestrelAMPL()
+-        self._opt = None
+         self._ah = {} # maps NEOS job numbers to their corresponding action handle.
+         self._args = {}
+@@ -42,5 +41,5 @@
+         # store pairs of NEOS message offset and NEOS message string.
+         # index into the map is the NEOS job number
+-        self._neos_log = {} 
++        self._neos_log = {}
+         self._solvers = {}
+ 
+@@ -72,6 +71,6 @@
+             OptSolver._options_string_to_dict(kwds.pop('options_string', '')))
+ 
+-        self._opt = SolverFactory('_neos')
+-        self._opt._presolve(*args, **kwds)
++        opt = SolverFactory('_neos')
++        opt._presolve(*args, **kwds)
+         #
+         # Map NEOS name, using lowercase convention in Pyomo
+@@ -88,12 +87,12 @@
+         os.environ['kestrel_options'] = 'solver=%s' % self._solvers[solver]
+         solver_options = {}
+-        for key in self._opt.options:
+-            solver_options[key]=self._opt.options[key]
++        for key in opt.options:
++            solver_options[key]=opt.options[key]
+         solver_options.update(ephemeral_solver_options)
+ 
+-        options = self._opt._get_options_string(solver_options)
++        options = opt._get_options_string(solver_options)
+         if not options == "":
+-            os.environ[self._solvers[solver].lower()+'_options'] = self._opt._get_options_string()
+-        xml = self.kestrel.formXML(self._opt._problem_files[0])
++            os.environ[self._solvers[solver].lower()+'_options'] = opt._get_options_string()
++        xml = self.kestrel.formXML(opt._problem_files[0])
+         (jobNumber, password) = self.kestrel.submit(xml)
+         ah.job = jobNumber
+@@ -104,5 +103,9 @@
+         self._ah[jobNumber] = ah
+         self._neos_log[jobNumber] = (0, "")
+-        self._opt_data[jobNumber] = self._opt._smap_id
++        self._opt_data[jobNumber] = (opt,
++                                     opt._smap_id,
++                                     opt._load_solutions,
++                                     opt._select_index,
++                                     opt._default_variable_value)
+         self._args[jobNumber] = args
+         return ah
+@@ -124,9 +127,13 @@
+ 
+                 # the job is done.
+-                ah = self._ah[jobNumber]                
++                ah = self._ah[jobNumber]
+                 del self._ah[jobNumber]
+                 ah.status = ActionStatus.done
+-                
+-                smap_id = self._opt_data[jobNumber]
++
++                (opt,
++                 smap_id,
++                 load_solutions,
++                 select_index,
++                 default_variable_value) = self._opt_data[jobNumber]
+                 del self._opt_data[jobNumber]
+ 
+@@ -138,8 +144,8 @@
+ 
+                 (current_offset, current_message) = self._neos_log[jobNumber]
+-                OUTPUT=open(self._opt._log_file, 'w')
++                OUTPUT=open(opt._log_file, 'w')
+                 six.print_(current_message, file=OUTPUT)
+                 OUTPUT.close()
+-                OUTPUT=open(self._opt._soln_file, 'w')
++                OUTPUT=open(opt._soln_file, 'w')
+                 if six.PY2:
+                     six.print_(results.data, file=OUTPUT)
+@@ -149,14 +157,21 @@
+ 
+                 rc = None
+-                solver_results = self._opt.process_output(rc)
+-                #solver_results._symbol_map = self._opt._symbol_map
++                solver_results = opt.process_output(rc)
+                 solver_results._smap_id = smap_id
+                 self.results[ah.id] = solver_results
++                opt.deactivate()
+ 
+                 if isinstance(args[0], Block):
+                     _model = args[0]
+-                    _model.solutions.load_from(solver_results)
+-                    solver_results._smap_id = None
+-                    solver_results.solution.clear()
++                    if load_solutions:
++                        _model.solutions.load_from(
++                            solver_results,
++                            select=select_index,
++                            default_variable_value=default_variable_value)
++                        solver_results._smap_id = None
++                        solver_results.solution.clear()
++                    else:
++                        solver_results._smap = _model.solutions.symbol_map[smap_id]
++                        _model.solutions.delete_symbol_map(smap_id)
+ 
+                 return ah
