@@ -30,9 +30,9 @@ install:
 build: off
 
 before_test:
-  - "conda build pyutilib serpent pyro4 pyomo --python %PYTHON%"
-  - "conda build suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
-  - "conda build ipopt_bin"
+  - "conda build -q pyutilib serpent pyro4 pyomo --python %PYTHON%"
+  - "conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "conda build -q ipopt_bin"
 
 # Actual test here
 test_script:
