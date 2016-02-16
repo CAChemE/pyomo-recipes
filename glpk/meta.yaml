@@ -8,7 +8,7 @@ source:
   md5: 237531a54f73155842f8defe51aedb0f
 
 build:
-  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 1) }}
+  number: {{ environ.get('APPVEYOR_BUILD_NUMBER', 1) }} [win]
   features:
     - vc9      [win and py27]
     - vc10     [win and py34]
