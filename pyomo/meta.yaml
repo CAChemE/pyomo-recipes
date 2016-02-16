@@ -11,7 +11,7 @@ source:
     - fix_neos.patch
 
 build:
-  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
+  number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
   preserve_egg_dir: True
   entry_points:

@@ -13,7 +13,7 @@ source:
     - move_version.patch
 
 build:
-  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
+  number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
 requirements:
   build:

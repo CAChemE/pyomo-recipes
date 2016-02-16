@@ -8,7 +8,7 @@ source:
   md5: 05869ac7b062828b34f8f927f0457b65
 
 build:
-  number: {{ environ.get(APPVEYOR_BUILD_NUMBER, 1) }} [win]
+  number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
 requirements:
   build:
