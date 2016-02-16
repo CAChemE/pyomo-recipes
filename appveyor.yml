@@ -6,6 +6,7 @@ version: 0.1.dev0-{build}
 branches:
   only:
   - master
+  - glpk_build
 
 environment:
   BINSTAR_TOKEN:
@@ -29,13 +30,14 @@ install:
 build: off
 
 before_test:
-  - "conda build -q pyutilib serpent pyro4 pyomo --python %PYTHON%"
-  - "conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
-  - "conda build -q ipopt_bin"
+#  - "conda build -q pyutilib serpent pyro4 pyomo --python %PYTHON%"
+#  - "conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+#  - "conda build -q ipopt_bin"
+  - "conda build -q glpk"
 
 # Actual test here
 test_script:
   - "echo XXX Test here XXX"
 
 after_test:
-  #- "anaconda -t %BINSTAR_TOKEN% upload C:\\Miniconda3-x64\\conda-bld\\win-64\\ipopt_bin-3.11.1-1.tar.bz2"
+  - "anaconda -t %BINSTAR_TOKEN% upload C:\\Miniconda3-x64\\conda-bld\\win-64\\glpk-4.57-1.tar.bz2"
