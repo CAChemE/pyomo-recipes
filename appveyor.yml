@@ -12,7 +12,6 @@ environment:
     secure: n7ll7JzU0nTN2caHJWRj0IflEN66ZIYwbMzexr6G2U7njzVdOY5Uvn17UZdhebq8
 
   matrix:
-    - PYTHON: 3.4
     - PYTHON: 3.5
 
 install:
