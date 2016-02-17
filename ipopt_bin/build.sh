@@ -1,6 +1,11 @@
 #!/bin/bash
 
-install -m755 bin/ipopt $PREFIX/bin/ipopt
+if [ "$(uname)" == "Linux" ]; then
+  install -Dm755 bin/ipopt $PREFIX/bin/ipopt
+elif [ "$(uname)" == "Darwin" ]; then
+  install -d $PREFIX/bin/
+  install -m755 bin/ipopt $PREFIX/bin/
+fi
 
 # Add more build steps here, if they are necessary.
 
