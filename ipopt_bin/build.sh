@@ -1,6 +1,6 @@
 #!/bin/bash
 
-install -Dm755 bin/ipopt $PREFIX/bin/ipopt
+install -m755 bin/ipopt $PREFIX/bin/ipopt
 
 # Add more build steps here, if they are necessary.
 
