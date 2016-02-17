@@ -1,0 +1,41 @@
+# The only current way of using OS X virtual machines in Travis CI
+# is setting up the environment for Objective-C
+# This is not a problem because Python will be installed through conda
+
+language: objective-c
+
+env:
+  matrix:
+    - PYTHON=3.5
+
+branches:
+  only:
+    - osx-travis
+
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+
+  # Install the build and runtime dependencies of the project
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda install -q conda-build anaconda-client
+  - conda info -a
+
+  # Check that we have the expected version of Python
+  - python --version
+
+install:
+  - conda build -q pyutilib serpent pyro4 pyomo --python $PYTHON
+  - conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python $PYTHON
+  - conda build -q ipopt_bin --python $PYTHON
+  - conda build -q glpk --python $PYTHON
+
+script:
+  - echo "XXX Test here XXX"
+
+after_success:
+  - anaconda -t $BINSTAR_TOKEN upload --no-progress $HOME/miniconda/conda-bld/osx/*.tar.bz2
+
+sudo: false
