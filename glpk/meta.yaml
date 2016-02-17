@@ -9,7 +9,7 @@ source:
 
 build:
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
-  number: {{ environ.get("TRAVIS_BUILD_NUMBER", 1) }} [osx]
+  number: {{ environ.get("TRAVIS_BUILD_NUMBER", 1) }} [osx or linux]
   features:
     - vc9      [win and py27]
     - vc10     [win and py34]
