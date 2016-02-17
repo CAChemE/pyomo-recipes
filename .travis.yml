@@ -31,7 +31,7 @@ install:
   - conda build -q pyutilib serpent pyro4 pyomo --python $PYTHON
   - conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator pyomo.extras --python $PYTHON
   - conda build -q ipopt_bin --python $PYTHON
-  - conda build -q glpk --python $PYTHON
+  - conda build -q glpk --python $PYTHON || true
 
 script:
   - echo "XXX Test here XXX"
