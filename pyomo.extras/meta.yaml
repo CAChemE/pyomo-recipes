@@ -12,6 +12,7 @@ source:
 
 build:
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
+  number: {{ environ.get("TRAVIS_BUILD_NUMBER", 1) }} [osx]
 
 requirements:
   build:
