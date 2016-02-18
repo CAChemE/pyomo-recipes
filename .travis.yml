@@ -40,6 +40,7 @@ script:
   - echo "XXX Test here XXX"
 
 after_success:
-  - anaconda -t $BINSTAR_TOKEN upload --no-progress $HOME/miniconda/conda-bld/osx/*.tar.bz2
+  - if [[ "$(uname)" == "Darwin" ]]; then anaconda -t $BINSTAR_TOKEN upload --no-progress $HOME/miniconda/conda-bld/osx/*.tar.bz2; fi
+  - if [[ "$(uname)" == "Linux" ]]; then anaconda -t $BINSTAR_TOKEN upload --no-progress $HOME/miniconda/conda-bld/linux-64/*.tar.bz2; fi
 
 sudo: false
