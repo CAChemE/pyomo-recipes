@@ -5,7 +5,10 @@ os:
   - linux
 
 env:
-  - PYTHON=3.5
+  matrix:
+    - PYTHON=3.5
+  global:
+    secure: eGCijJbVIN09JXeM6uRKYClqYa97hxXAb4gWdnDSChglvqQQlcINsOJw5rEgowIOgPwYR5pRDXa5lDs68hvdpxHHTw6dVRX2X4XdkILYJhP/plpkZIPoWEOsAnNoehMDtZKZlT4NFg30xVHmdE7bV//vkPjeHKVpiKAp/M2SgimNbRz1v8mAgFddQjXUOaqe6Cn5/hNBMhnn6eibsdHMGv9VRllbCCQvWptKmvEZ75IUpS+/58dsyimf5isj7Kn5bgNYFc/vglmM+gsr6QiGxcKH1xLorXuGNu4S9hV3rHs15X9Fj6eOLsNTC/l7HvzvMW3CeGuuhnqs89uEPBKIFXOUEBCyLL6ujTJDf0WpZiEICfpFPws4T20SiWJVMxLJRZnpmMmhKyg6d7qvi3yBSzb4sqxxVrgkw5IT5IlPkgI+rNCnIdnwJtaSQTR2BBuj58HvUyRkwrDZbrVjmVorPVly1z1cCxAIGTKIeDD+LKfm1ouS/8cl7HftSIqc3QhiqWjxTOOLRv5rnJqgMtwZMgaOVQ/rx77rBKqbvnCvPMKBc58oL6RglYvtP1giq6t2yTwWmUUjkcR36Ess+JwZ1EznaXhEVsk4zeBueVfiHvBlBxrgvvdXZ5DjdwrcCFjRScQOMKUwwBPtMk0GcG0d73Klbr1h+OctcUfwg4TCAk8=
 
 branches:
   only:
