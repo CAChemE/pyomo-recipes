@@ -1,14 +1,11 @@
 package:
   name: pyomo
-  version: "4.2.10784"
+  version: "4.3.11323"
 
 source:
-  fn: Pyomo-4.2.10784.tar.gz
-  url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-4.2.10784.tar.gz
-  md5: b5d0ffcb19a8b55904b8e42a28c3bf09
-
-  patches:
-    - fix_neos.patch
+  fn: Pyomo-4.3.11323.tar.gz
+  url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-4.3.11323.tar.gz
+  md5: 9fa4c9e7be57b22cf8e3d2fa43bd033d
 
 build:
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
@@ -16,6 +13,7 @@ build:
   preserve_egg_dir: True
   entry_points:
     - runbenders=pyomo.pysp.benders:Benders_main
+    - evaluate_xhat=pyomo.pysp.evaluate_xhat:EvaluateXhat_main
     - runph=pyomo.pysp.phinit:PH_main
     - runef=pyomo.pysp.ef_writer_script:main
     - pysp2smps=pyomo.pysp.smps.pysp2smps:main
@@ -37,20 +35,22 @@ requirements:
   build:
     - python
     - setuptools
-    - pyutilib >=5.2.3601
+    - pyutilib >=5.3.2
     - pyro4 >=4.41
     - ply
     - nose
     - six >=1.6.1
+    - appdirs
 
   run:
     - python
     - setuptools
-    - pyutilib >=5.2.3601
+    - pyutilib >=5.3.2
     - pyro4 >=4.41
     - ply
     - nose
     - six >=1.6.1
+    - appdirs
 
 test:
   # Python imports
