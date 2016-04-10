@@ -8,6 +8,7 @@ source:
   md5: 9fa4c9e7be57b22cf8e3d2fa43bd033d
 
 build:
+  noarch_python: True
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
   preserve_egg_dir: True

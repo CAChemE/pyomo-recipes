@@ -4,6 +4,9 @@ package:
   name: pyomo.solvers
   version: 1.0
 
+build:
+  noarch_python: True
+
 requirements:
   run:
     - python

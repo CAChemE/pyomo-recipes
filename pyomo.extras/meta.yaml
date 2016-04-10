@@ -2,6 +2,9 @@ package:
   name: pyomo.extras
   version: 3.0
 
+build:
+  noarch_python: True
+
 requirements:
   run:
     - python
