@@ -1,0 +1,15 @@
+# A metapackage for Pyomo solvers
+
+package:
+  name: pyomo.solvers
+  version: 1.0
+
+requirements:
+  run:
+    - python
+    - glpk
+    - ipopt_bin
+
+about:
+  license: BSD License
+  summary: 'Extra packages that enhance the functionality of Pyomo'
