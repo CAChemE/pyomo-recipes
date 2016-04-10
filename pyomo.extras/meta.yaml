@@ -11,6 +11,7 @@ source:
    # - fix.patch
 
 build:
+  noarch_python: True
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
 requirements:
