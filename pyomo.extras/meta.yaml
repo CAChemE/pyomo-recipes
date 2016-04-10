@@ -13,6 +13,9 @@ source:
 build:
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
+build:
+  noarch_python: True
+
 requirements:
   build:
     - python
