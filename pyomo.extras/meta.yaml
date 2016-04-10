@@ -1,59 +1,23 @@
 package:
   name: pyomo.extras
-  version: "2.0"
-
-source:
-  fn: pyomo.extras-2.0.tar.gz
-  url: https://pypi.python.org/packages/source/p/pyomo.extras/pyomo.extras-2.0.tar.gz
-  md5: 3602a862ff6a07b4879794ec5e572aab
-#  patches:
-   # List any patch files here
-   # - fix.patch
-
-build:
-  number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
+  version: 3.0
 
 requirements:
-  build:
-    - python
-    - setuptools
-    - suds-jurko
-    - pyyaml
-    - openopt
-    - funcdesigner
-    - derapproximator
-
   run:
     - python
+    - sympy
+    - xlrd
+    - openpyxl
     - suds-jurko
     - pyyaml
+    - pypyodbc
+    - pymysql
     - openopt
     - funcdesigner
     - derapproximator
-
-test:
-  # Python imports
-  imports:
-    - pyomo
-    - pyomo.extras
-
-  # commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
+    - ipython
+    - pyro4
 
 about:
-  home: https://software.sandia.gov/svn/public/pyomo/pyomo.extras
   license: BSD License
-  summary: 'Extra packages that enhance the functionality of Pyomo'
-
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
+  summary: 'Extra Python packages that enhance the functionality of Pyomo'
