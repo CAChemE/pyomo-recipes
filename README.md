@@ -7,7 +7,7 @@ Useful conda recipes for Pyomo and dependencies.
 All the packages are uploaded to https://anaconda.org/cachemeorg/. To install everything:
 
 ```cmd
-conda install pyomo pyomo.extras glpk ipopt_bin --channel cachemeorg
+conda install pyomo pyomo.extras pyomo.solvers --channel cachemeorg
 ```
 
 ## Compilation from the recipes
