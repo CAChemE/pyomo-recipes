@@ -19,6 +19,7 @@ install:
 
   # Install the build and runtime dependencies of the project.
   - "conda config --set always_yes yes --set changeps1 no"
+  - "conda config --add channels conda-forge"
   - "conda update -q conda"
   - "conda install -q conda-build anaconda-client"
   - "conda info -a"
@@ -30,9 +31,8 @@ build: off
 
 before_test:
   - "conda build -q pyutilib serpent pyro4 pyomo --python %PYTHON%"
-  - "conda build -q suds-jurko setproctitle openopt funcdesigner derapproximator --python %PYTHON%"
+  - "conda build -q openopt funcdesigner derapproximator --python %PYTHON%"
   - "conda build -q ipopt_bin --python %PYTHON%"
-  - "conda build -q glpk --python %PYTHON%"
   - "conda build -q pyomo.extras pyomo.solvers"
 
 # Actual test here
