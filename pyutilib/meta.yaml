@@ -1,13 +1,14 @@
 package:
   name: pyutilib
-  version: "5.2.3601"
+  version: "5.3.3"
 
 source:
-  fn: PyUtilib-5.2.3601.tar.gz
-  url: https://pypi.python.org/packages/source/P/PyUtilib/PyUtilib-5.2.3601.tar.gz
-  md5: 0c0d54632c70427c84a21d31f56c1a5b
+  fn: PyUtilib-5.3.3.tar.gz
+  url: https://pypi.python.org/packages/source/P/PyUtilib/PyUtilib-5.3.3.tar.gz
+  md5: 2910a329844369d4caa7fc031d64ef80
 
 build:
+  noarch_python: True
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
 
   preserve_egg_dir: True

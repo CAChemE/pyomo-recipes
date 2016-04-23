@@ -1,35 +1,28 @@
 package:
-  name: derapproximator
-  version: "0.52"
+  name: appdirs
+  version: "1.4.0"
 
 source:
-  fn: DerApproximator-0.52.tar.gz
-  url: https://pypi.python.org/packages/source/D/DerApproximator/DerApproximator-0.52.tar.gz
-  md5: 31138fd6de99c7a6c1d7f2f97dc41c7d
-  patches:
-   # List any patch files here
-    - empty_init.patch
-    - change_import.patch
-    - move_version.patch
+  fn: appdirs-1.4.0.tar.gz
+  url: https://pypi.python.org/packages/source/a/appdirs/appdirs-1.4.0.tar.gz
+  md5: 1d17b4c9694ab84794e228f28dc3275b
 
 build:
   noarch_python: True
   number: {{ environ.get("APPVEYOR_BUILD_NUMBER", 1) }} [win]
+  preserve_egg_dir: True
 
 requirements:
   build:
     - python
     - setuptools
-    - numpy
 
   run:
     - python
-    - numpy
 
-test:
+# test:
   # Python imports
-  imports:
-    - DerApproximator
+  # imports:
 
   # commands:
     # You can put test commands to be run here.  Use this to test that the
@@ -44,9 +37,9 @@ test:
     # - nose
 
 about:
-  home: http://openopt.org
-  license: BSD License
-  summary: 'A python module for finite-differences derivatives approximation'
+  home: http://github.com/ActiveState/appdirs
+  license: MIT License
+  summary: 'A small Python module for determining appropriate " +         "platform-specific dirs, e.g. a "user data dir".'
 
 # See
 # http://docs.continuum.io/conda/build.html for

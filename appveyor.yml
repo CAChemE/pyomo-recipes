@@ -31,8 +31,9 @@ build: off
 
 before_test:
   - "conda build -q pyutilib serpent pyro4 pyomo --python %PYTHON%"
-  - "conda build -q openopt funcdesigner derapproximator pyomo.extras --python %PYTHON%"
+  - "conda build -q openopt funcdesigner derapproximator --python %PYTHON%"
   - "conda build -q ipopt_bin --python %PYTHON%"
+  - "conda build -q pyomo.extras pyomo.solvers"
 
 # Actual test here
 test_script:
