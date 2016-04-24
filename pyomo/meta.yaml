@@ -1,11 +1,13 @@
+{% set version = "4.3.11377" %}
+
 package:
   name: pyomo
-  version: "4.3.11328"
+  version: {{ version }}
 
 source:
-  fn: Pyomo-4.3.11328.tar.gz
-  url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-4.3.11328.tar.gz
-  md5: 962456b7f3f0057c79fa963509686116
+  fn: Pyomo-{{ version }}.tar.gz
+  url: https://pypi.python.org/packages/source/P/Pyomo/Pyomo-{{ version }}.tar.gz
+  md5: 6e27c7b5c1398bc56156ba9d56b43679
 
 build:
   noarch_python: True
@@ -36,7 +38,7 @@ requirements:
   build:
     - python
     - setuptools
-    - pyutilib >=5.3.3
+    - pyutilib >=5.3.5
     - pyro4 >=4.41
     - ply
     - nose
@@ -46,7 +48,7 @@ requirements:
   run:
     - python
     - setuptools
-    - pyutilib >=5.3.2
+    - pyutilib >=5.3.5
     - pyro4 >=4.41
     - ply
     - nose
